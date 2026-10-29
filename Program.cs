@@ -1,119 +1,222 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PhCSharp
+namespace PhSharp
 {
     internal class Program
     {
-        //1 задание
+
+
         static void Main(string[] args)
         {
-            Console.Write("Введите длину прямоугольника: ");
-            int a = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Введите ширину прямоугольника: ");
-            int b = Convert.ToInt32(Console.ReadLine());
+            // 1 задание
+            Task1();
 
-           Console.WriteLine($"Площадь прямоугольника - {a * b}.\nПериметр прямоугольника - {(a + b) * 2}.");
+            // 2 задание
+            // Task2();
+
+            // 3 задание
+            // Task3();
+
+            // 4 задание
+            // Task4();
+
+            // 5 задание
+            // Task5();
+
         }
 
-        //2 задание
-        //static void Main(string[] args)
-        //{
-        //    Console.Write("Введите сумму в рублях: ");
-        //    double rubles = double.Parse(Console.ReadLine());
+        // 1 задание
+        static void Task1()
+        {
+            Console.Write("Введите размер массива N: ");
+            int n = int.Parse(Console.ReadLine());
 
-        //    Console.Write("Введите текущий курс доллара (рублей за 1$): ");
-        //    double rate = double.Parse(Console.ReadLine());
+            int[] numbers = new int[n];
 
-        //    double dollars = rubles / rate;
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write("Введите число: ");
+                numbers[i] = int.Parse(Console.ReadLine());
+            }
 
-        //    Console.WriteLine($"Сумма в долларах: {dollars}$");
-        //}
+            Console.WriteLine("Массив в обратном порядке:");
+            for (int i = n - 1; i >= 0; i--)
+            {
+                Console.Write(numbers[i] + " ");
+            }
+            Console.WriteLine();
 
-        //3 задание
-        //static void Main(string[] args)
-        //{
-        //    double sum = 0;
-        //    Console.WriteLine("Введите температуру для каждого из 7 дней недели:");
+            int sum = 0;
+            for (int i = 0; i < n; i++)
+            {
+                sum = sum + numbers[i];
+            }
 
-        //    for (int i = 1; i <= 7; i++)
-        //    {
-        //        Console.Write($"День {i}: ");
-        //        sum += double.Parse(Console.ReadLine());
-        //    }
+            double average = (double)sum / n;
+            int closest = numbers[0];
 
-        //    double averageTemp = sum / 7;
-        //    Console.WriteLine($"Средняя температура за неделю: {averageTemp}°C");
-        //}
+            for (int i = 1; i < n; i++)
+            {
+                if (Math.Abs(numbers[i] - average) < Math.Abs(closest - average))
+                {
+                    closest = numbers[i];
+                }
+            }
 
-        //4 задание
-        //static void Main(string[] args)
-        //{
-        //    double[] averages = new double[3];
+            Console.WriteLine("Среднее арифметическое: " + Math.Round(average, 2));
+            Console.WriteLine("Ближайшее число: " + closest);
+        }
 
-        //    for (int student = 1; student <= 3; student++)
-        //    {
-        //        Console.WriteLine($"\nВведите 5 оценок для {student}-го студента:");
-        //        double studentSum = 0;
+        // 2 задание
+        static void Task2()
+        {
+            Console.Write("Введите количество студентов: ");
+            int n = int.Parse(Console.ReadLine());
 
-        //        for (int grade = 1; grade <= 5; grade++)
-        //        {
-        //            Console.Write($"Оценка {grade}: ");
-        //            studentSum += double.Parse(Console.ReadLine());
-        //        }
+            Console.Write("Введите количество предметов: ");
+            int m = int.Parse(Console.ReadLine());
 
-        //        averages[student - 1] = studentSum / 5;
-        //    }
+            int[,] grades = new int[n, m];
 
-        //    Console.WriteLine("\nСредние значения оценок:");
-        //    for (int i = 0; i < 3; i++)
-        //    {
-        //        Console.WriteLine($"Студент {i + 1}: {averages[i]:F2}");
-        //    }
-        //}
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Студент " + (i + 1));
+                for (int j = 0; j < m; j++)
+                {
+                    Console.Write("Оценка: ");
+                    grades[i, j] = int.Parse(Console.ReadLine());
+                }
+            }
 
-        //5 задание
-        //static void Main(string[] args)
-        //{
-        //    int[,] matrix = new int[3, 3];
-        //    int[,] transposed = new int[3, 3];
+            Console.WriteLine("Средние баллы:");
+            for (int i = 0; i < n; i++)
+            {
+                int sum = 0;
+                for (int j = 0; j < m; j++)
+                {
+                    sum = sum + grades[i, j];
+                }
 
-        //    Console.WriteLine("Введите 9 чисел матрицы 3х3 через пробел (например: 1 2 3 4 5 6 7 8 9):");
-        //    string input = Console.ReadLine();
+                double average = (double)sum / m;
+                Console.WriteLine("Студент " + (i + 1) + ": " + Math.Round(average, 2));
+            }
+        }
 
-        //    string[] tokens = input.Split(' ');
+        // 3 задание
+        static void Task3()
+        {
+            List<int> numbers = new List<int>();
 
-        //    int index = 0;
+            while (true)
+            {
+                Console.Write("Введите число: ");
+                int number = int.Parse(Console.ReadLine());
 
-        //    for (int i = 0; i < 3; i++)
-        //    {
-        //        for (int j = 0; j < 3; j++)
-        //        {
-        //            matrix[i, j] = int.Parse(tokens[index++]);
-        //        }
-        //    }
+                if (numbers.Contains(number))
+                {
+                    Console.WriteLine("Повторение: " + number);
+                    break;
+                }
 
+                numbers.Add(number);
+            }
 
-        //    for (int i = 0; i < 3; i++)
-        //    {
-        //        for (int j = 0; j < 3; j++)
-        //        {
-        //            transposed[j, i] = matrix[i, j];
-        //        }
-        //    }
+            Console.WriteLine("Массив чисел:");
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                Console.Write(numbers[i] + " ");
+            }
+            Console.WriteLine();
+        }
 
-        //    Console.WriteLine("\nСтало:");
-        //    for (int i = 0; i < 3; i++)
-        //    {
-        //        for (int j = 0; j < 3; j++)
-        //        {
-        //            Console.Write(transposed[i, j] + "\t");
-        //        }
-        //        Console.WriteLine();
-        //    }
-        //}
+        // 4 задание
+        static void Task4()
+        {
+            Dictionary<string, string> phoneBook = new Dictionary<string, string>();
+
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Команды: добавить, поиск, просмотр, выход");
+                Console.Write("Введите команду: ");
+                string command = Console.ReadLine();
+
+                if (command == "выход")
+                {
+                    break;
+                }
+                else if (command == "добавить")
+                {
+                    Console.Write("Имя: ");
+                    string name = Console.ReadLine();
+
+                    Console.Write("Телефон: ");
+                    string phone = Console.ReadLine();
+
+                    phoneBook[name] = phone;
+                    Console.WriteLine("Контакт добавлен.");
+                }
+                else if (command == "поиск")
+                {
+                    Console.Write("Имя: ");
+                    string name = Console.ReadLine();
+
+                    if (phoneBook.ContainsKey(name))
+                    {
+                        Console.WriteLine(phoneBook[name]);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Контакт не найден.");
+                    }
+                }
+                else if (command == "просмотр")
+                {
+                    foreach (string name in phoneBook.Keys)
+                    {
+                        Console.WriteLine(name + ": " + phoneBook[name]);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Неизвестная команда.");
+                }
+            }
+        }
+
+        // 5 задание
+        static void Task5()
+        {
+            Dictionary<string, int> fruits = new Dictionary<string, int>();
+
+            while (true)
+            {
+                Console.Write("Введите фрукт (или выход): ");
+                string fruit = Console.ReadLine();
+
+                if (fruit == "выход")
+                {
+                    break;
+                }
+
+                if (fruits.ContainsKey(fruit))
+                {
+                    fruits[fruit] = fruits[fruit] + 1;
+                }
+                else
+                {
+                    fruits[fruit] = 1;
+                }
+
+                Console.WriteLine(fruit + ": " + fruits[fruit]);
+            }
+
+            Console.WriteLine("Словарь:");
+            foreach (string fruit in fruits.Keys)
+            {
+                Console.WriteLine(fruit + ": " + fruits[fruit]);
+            }
+        }
     }
 }
